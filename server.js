@@ -27,9 +27,8 @@ io.on("connection",(socket)=>{
         socket.in(socket.roomId).emit("clearCanvas");
     })
     socket.on("cursorMove", (data)=>{
-        console.log("move", data)
-        const {offsetX, offsetY} = data;
+        const {clientX, clientY} = data;
         const socketId = socket.id;
-        socket.in(socket.roomId).emit("cursorMove", {socketId, offsetX, offsetY});
+        socket.in(socket.roomId).emit("cursorMove", {socketId,  clientX,  clientY});
     })
 })
