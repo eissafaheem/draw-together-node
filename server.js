@@ -18,6 +18,7 @@ io.on("connection", (socket) => {
     socket.on("drawingData", (data) => {
         // console.log("dd", data)
         const {
+            myName,
             clientX,
             clientY,
             offsetX,
@@ -25,7 +26,8 @@ io.on("connection", (socket) => {
             color
         } = data;
         socket.in(socket.roomId).emit("drawingData", {
-            socketId, 
+            socketId,
+            myName,
             clientX,
             clientY,
             offsetX,
@@ -42,7 +44,8 @@ io.on("connection", (socket) => {
         socket.in(socket.roomId).emit("clearCanvas");
     })
     socket.on("cursorMove", (data) => {
-        const { clientX, clientY } = data;
-        socket.in(socket.roomId).emit("cursorMove", { socketId, clientX, clientY });
+        console.log(data)
+        const { myName, clientX, clientY } = data;
+        socket.in(socket.roomId).emit("cursorMove", { socketId, myName, clientX, clientY });
     })
 })
